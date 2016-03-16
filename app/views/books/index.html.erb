@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+<h4 align ="center">Welcome <%= current_user.email %></h4>
+<% end %>
+<% @books.each do |book| %>
+	<h2><%= link_to book.title, book_path(book) %></h2>
+<% end %>
+
