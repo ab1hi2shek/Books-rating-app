@@ -7,13 +7,17 @@ class ReviewsController < ApplicationController
 	end
 
 	def create
+		if user_signed_in?
 		@review = Review.new(review_params)
 		@review.book_id = @book.id
-		@review.user_id = current_user.id
-		if @review.save
-			redirect_to book_path(@book)
+			@review.user_id = current_user.id
+			if @review.save
+				redirect_to book_path(@book)
+			else
+				render 'new'
+			end
 		else
-			render 'new'
+			redirect_to book_path(@book)
 		end
 	end
 
